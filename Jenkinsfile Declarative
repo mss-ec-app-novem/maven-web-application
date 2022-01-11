@@ -25,7 +25,7 @@ label 'master'
 	    git branch: 'development', credentialsId: '8b54a450-5718-4319-9fab-610112012730', url: 'https://github.com/mss-ec-app-novem/maven-web-application.git'
 	   }
 	  }
-      
+      */
 	 //Do the Build
      stage('Build'){
        steps{
@@ -51,7 +51,7 @@ label 'master'
   sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@3.109.214.10:/opt/apache-tomcat-9.0.56/webapps/"
            }
            }
-          }	       
+          }	*/       
 }//stages closing
 
 }//pipeline closing

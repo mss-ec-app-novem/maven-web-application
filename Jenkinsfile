@@ -1,6 +1,9 @@
 node("master") 
 {
-// Default values
+  def notifyBuild(String buildStatus = 'STARTED') {
+  // build status of null means successful
+  buildStatus =  buildStatus ?: 'SUCCESS'
+  // Default values
   def colorName = 'RED'
   def colorCode = '#FF0000'
   def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
@@ -10,7 +13,7 @@ node("master")
   if (buildStatus == 'STARTED') {
     color = 'YELLOW'
     colorCode = '#FFFF00'
-  } else if (buildStatus == 'SUCCESSFUL') {
+  } else if (buildStatus == 'SUCCESS') {
     color = 'GREEN'
     colorCode = '#00FF00'
   } else {
@@ -28,7 +31,7 @@ git branch: 'development', credentialsId: '8b54a450-5718-4319-9fab-610112012730'
 }
 stage('build')
 {
-/*
+
   sh "${mavenHOME}/bin/mvn clean package"
 }
 stage('ExecuteSonarQubeReport')
@@ -54,4 +57,7 @@ Regards,
 A Ishahak.
 9505728116.''', subject: 'Build over', to: 'aishahak1997@gmail.com'
 }
+*/
+notifyBuild(currentBuild.result)
+  
 }    

@@ -23,7 +23,7 @@ finally {
     notifyBuild(currentBuild.result)
      }
 }
-def notifyBuild(String buildStatus = 'STARTED') {
+def SendSlackNotification(String buildStatus = 'STARTED') {
   // build status of null means successful
   buildStatus =  buildStatus ?: 'SUCCESSFUL'
 

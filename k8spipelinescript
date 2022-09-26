@@ -1,0 +1,23 @@
+node{
+    
+    stage('git clone'){
+      git credentialsId: '11bb5ba1-ff90-45af-af06-27e109763478', url: 'https://github.com/mss-ec-app-novem/maven-web-application.git'
+    }
+    
+    stage('maven clean Build'){
+        
+        def mavenHome = tool name: "maven3.8.6", type: "maven"
+        def mavenCMD = "${mavenHome}/bin/mvn "
+        sh "${mavenCMD} clean package"
+    }
+    stage('Build Docker Image'){
+    
+    sh "docker build -t dockervampire/maven-web-application:5 ."
+    }
+    stage('docker push'){
+        
+        sh "docker login -u dockervampire -p samurai1997"
+        sh "docker push dockervampire/maven-web-application:5"
+    }
+        
+ }
